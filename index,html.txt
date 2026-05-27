@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Do You Love Me Bitu?</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      background:linear-gradient(135deg,#ff9ecf,#ffd6e8);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      padding:20px;
+    }
+
+    .container{
+      background:rgba(255,255,255,0.15);
+      padding:40px;
+      border-radius:25px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      max-width:500px;
+      width:100%;
+    }
+
+    h1{
+      font-size:2.2rem;
+      margin-bottom:15px;
+    }
+
+    p{
+      margin-bottom:25px;
+      font-size:1.2rem;
+    }
+
+    .emoji{
+      font-size:3rem;
+      margin-bottom:15px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin-top:20px;
+    }
+
+    button{
+      border:none;
+      padding:14px 28px;
+      border-radius:50px;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+    }
+
+    #yesBtn{
+      background:#ff4f91;
+      color:white;
+    }
+
+    #noBtn{
+      background:white;
+      color:#ff4f91;
+    }
+
+    #finalPage{
+      display:none;
+    }
+
+    .heart{
+      position:absolute;
+      font-size:20px;
+      animation:float 4s linear infinite;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh);
+        opacity:0;
+      }
+
+      100%{
+        transform:translateY(-120vh);
+        opacity:1;
+      }
+    }
+
+    #qrSection{
+      margin-top:30px;
+    }
+
+    #qrSection img{
+      background:white;
+      padding:10px;
+      border-radius:10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="mainPage">
+
+    <div class="emoji">🥺💖</div>
+
+    <h1>Do You Love Me Bitu?</h1>
+
+    <p>You only have one correct answer 😌</p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💕</button>
+      <button id="noBtn">No 😭</button>
+    </div>
+
+    <div id="qrSection">
+      <p>📱 Scan This QR Code</p>
+
+      <img id="qrImage" width="180" height="180">
+    </div>
+
+  </div>
+
+  <div class="container" id="finalPage">
+
+    <div class="emoji">💘🥰💘</div>
+
+    <h1>Love You Back Bituuuu My Love 💖</h1>
+
+    <p>You just made my whole day 😭💕</p>
+
+  </div>
+
+<script>
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+const mainPage = document.getElementById("mainPage");
+const finalPage = document.getElementById("finalPage");
+
+let scale = 1;
+
+noBtn.addEventListener("click", () => {
+
+  scale -= 0.15;
+
+  if(scale <= 0.1){
+
+    noBtn.style.display = "none";
+
+  } else {
+
+    noBtn.style.transform = scale(${scale});
+    noBtn.style.opacity = scale;
+
+  }
+
+  yesBtn.style.transform = scale(${1 + (1-scale)});
+
+});
+
+yesBtn.addEventListener("click", () => {
+
+  mainPage.style.display = "none";
+
+  finalPage.style.display = "block";
+
+  for(let i=0;i<25;i++){
+
+    createHeart();
+
+  }
+
+});
+
+function createHeart(){
+
+  const heart = document.createElement("div");
+
+  heart.classList.add("heart");
+
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random()*window.innerWidth + "px";
+
+  heart.style.fontSize = (Math.random()*20+20) + "px";
+
+  heart.style.animationDuration = (Math.random()*2+3) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+
+    heart.remove();
+
+  },5000);
+
+}
+
+/* PUT YOUR WEBSITE LINK HERE */
+
+const hostedURL = "https://yourwebsite.netlify.app";
+
+/* QR CODE */
+
+const qrImage = document.getElementById("qrImage");
+
+qrImage.src =
+https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(hostedURL)};
+
+</script>
+
+</body>
+</html>
